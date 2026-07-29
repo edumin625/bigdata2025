@@ -20,6 +20,10 @@
       --accent-soft: #e8f1ff;
       --success: #147a3d;
       --warning: #7a3f00;
+      --status-live-bg: #e7f7ee;
+      --status-source-bg: #fff4df;
+      --status-broken: #9f1d1d;
+      --status-broken-bg: #fff0f0;
       --shadow-card: 0 1px 2px rgb(0 0 0 / 0.06), 0 12px 34px rgb(27 97 201 / 0.08);
       --space-2: 8px;
       --space-3: 12px;
@@ -325,17 +329,17 @@
     }
 
     .chip.status-source {
-      background: #fff4df;
+      background: var(--status-source-bg);
       color: var(--warning);
     }
 
     .chip.status-broken {
-      background: #fff0f0;
-      color: #9f1d1d;
+      background: var(--status-broken-bg);
+      color: var(--status-broken);
     }
 
     .chip.status-live {
-      background: #e7f7ee;
+      background: var(--status-live-bg);
       color: var(--success);
     }
 
@@ -554,10 +558,26 @@
       }
     }
 
+    function maskName(name) {
+      if (name.length <= 1) {
+        return name;
+      }
+      if (name.length === 2) {
+        return `${name[0]}*`;
+      }
+      return `${name[0]}*${name.slice(2)}`;
+    }
+
+    function maskNamesInText(text) {
+      return portfolios.reduce((current, item) => current.replaceAll(item.name, maskName(item.name)), text);
+    }
+
     function cardTemplate(item) {
       const statusText = item.status === "live" ? "웹사이트" : item.status === "source" ? "소스 코드" : "확인 필요";
       const statusClass = item.status === "live" ? "status-live" : item.status === "source" ? "status-source" : "status-broken";
-      const actionText = item.status === "broken" ? `${item.name} 링크 확인하기` : `${item.name} 포트폴리오 열기`;
+      const displayName = maskName(item.name);
+      const displayTitle = maskNamesInText(item.title);
+      const actionText = item.status === "broken" ? `${displayName} 링크 확인하기` : `${displayName} 포트폴리오 열기`;
       return `
         <article class="card" data-name="${item.name}" data-school="${item.school}">
           <div>
@@ -565,9 +585,9 @@
               <span class="chip">${item.school}</span>
               <span class="chip ${statusClass}">${statusText}</span>
             </div>
-            <h3>${item.name}</h3>
+            <h3>${displayName}</h3>
             <p class="school">${item.school}</p>
-            <p class="title">${item.title}</p>
+            <p class="title">${displayTitle}</p>
             <p class="host">${hostFromUrl(item.url)}</p>
           </div>
           <a class="card-link" href="${item.url}" target="_blank" rel="noopener noreferrer">${actionText}</a>
@@ -579,7 +599,7 @@
       const query = searchInput.value.trim().toLowerCase();
       const selectedSchool = schoolFilter.value;
       const filtered = portfolios.filter((item) => {
-        const haystack = `${item.name} ${item.school} ${item.title} ${item.url}`.toLowerCase();
+        const haystack = `${item.name} ${maskName(item.name)} ${item.school} ${item.title} ${maskNamesInText(item.title)} ${item.url}`.toLowerCase();
         const matchesQuery = query === "" || haystack.includes(query);
         const matchesSchool = selectedSchool === "all" || item.school === selectedSchool;
         return matchesQuery && matchesSchool;
