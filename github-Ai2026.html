@@ -22,15 +22,15 @@
 
     <aside class="hero-panel metrics-panel" aria-label="포트폴리오 등록 현황">
       <div class="metric">
-        <strong class="metric-value">18</strong>
+        <strong class="metric-value" id="total-students">18</strong>
         <span class="metric-label">수강생</span>
       </div>
       <div class="metric">
-        <strong class="metric-value">7</strong>
+        <strong class="metric-value" id="linked-count">17</strong>
         <span class="metric-label">등록 주소</span>
       </div>
       <div class="metric">
-        <strong class="metric-value">11</strong>
+        <strong class="metric-value" id="pending-count">1</strong>
         <span class="metric-label">링크 미등록</span>
       </div>
     </aside>
@@ -47,8 +47,8 @@
       <span class="control-label">링크 상태</span>
       <div class="filter-bar" role="group" aria-label="링크 상태 필터">
         <button class="filter-button" type="button" data-filter="all" aria-pressed="true">전체</button>
-        <button class="filter-button" type="button" data-filter="linked" aria-pressed="false">링크 등록 7</button>
-        <button class="filter-button" type="button" data-filter="pending" aria-pressed="false">미등록 11</button>
+        <button class="filter-button" type="button" data-filter="linked" aria-pressed="false" id="filter-linked-btn">링크 등록 17</button>
+        <button class="filter-button" type="button" data-filter="pending" aria-pressed="false" id="filter-pending-btn">미등록 1</button>
       </div>
     </div>
   </section>
@@ -77,25 +77,37 @@
   <script>
     (() => {
       const students = [
-        { name: "강은지", id: "swedu11", url: "https://eunji-5.github.io/AI2026/" },
-        { name: "권은찬", id: "swedu12", url: "https://090324kecee-maker.github.io/AI2026/" },
-        { name: "김도영", id: "swedu13", url: "https://kdysky09-wq.github.io/AI-2026/" },
-        { name: "김서진", id: "swedu14", url: "https://seojinnnnnnnn.github.io/AI2026/" },
+        { name: "강은지", id: "swedu11", url: "https://eunji-5.github.io/AI2026/", domain: "eunji-5.github.io/AI2026/" },
+        { name: "권은찬", id: "swedu12", url: "https://090324kecee-maker.github.io/AI2026/", domain: "090324kecee-maker.github.io/AI2026/" },
+        { name: "김도영", id: "swedu13", url: "https://kdysky09-wq.github.io/AI-2026/", domain: "kdysky09-wq.github.io/AI-2026/" },
+        { name: "김서진", id: "swedu14", url: "https://seojinnnnnnnn.github.io/AI2026/", domain: "seojinnnnnnnn.github.io/AI2026/" },
         { name: "김예찬", id: "swedu15" },
         { name: "김태윤", id: "swedu16", url: "https://upyajup.github.io/AI2026/", domain: "upyajup.github.io/AI2026/" },
         { name: "김태희", id: "swedu17", url: "https://swedu17.github.io/AI-2026/", domain: "swedu17.github.io/AI-2026/" },
-        { name: "문지훈", id: "swedu18", url: "https://haanjiseonloveleeyeajoon.github.io/2026AI/" },
+        { name: "문지훈", id: "swedu18", url: "https://haanjiseonloveleeyeajoon.github.io/2026AI/", domain: "haanjiseonloveleeyeajoon.github.io/2026AI/" },
         { name: "박우혁", id: "swedu19", url: "https://paintingsf.github.io/AI2026/", domain: "paintingsf.github.io/AI2026/" },
-        { name: "배이롭", id: "swedu20", url: "https://r-609.github.io/AI2026/" },
+        { name: "배이롭", id: "swedu20", url: "https://r-609.github.io/AI2026/", domain: "r-609.github.io/AI2026/" },
         { name: "신승하", id: "swedu21", url: "https://sinseungha335-art.github.io/AI2026/", domain: "sinseungha335-art.github.io/AI2026/" },
         { name: "이동관", id: "swedu22", url: "https://dlehdrhksdlehdrhksdlehdrhks.github.io/AI2026/", domain: "dlehdrhksdlehdrhksdlehdrhks.github.io/AI2026/" },
-        { name: "이지후", id: "swedu23", url: "https://ji4672387-beep.github.io/AI2026/" },
-        { name: "정상윤", id: "swedu24", url: "https://harry20090515-ai.github.io/AI2026/" },
+        { name: "이지후", id: "swedu23", url: "https://ji4672387-beep.github.io/AI2026/", domain: "ji4672387-beep.github.io/AI2026/" },
+        { name: "정상윤", id: "swedu24", url: "https://harry20090515-ai.github.io/AI2026/", domain: "harry20090515-ai.github.io/AI2026/" },
         { name: "정연우", id: "swedu25", url: "https://yweox.github.io/AI2026/", domain: "yweox.github.io/AI2026/" },
         { name: "제준영", id: "swedu26", url: "https://wpwnsdud1234.github.io/AI2026/", domain: "wpwnsdud1234.github.io/AI2026/" },
-        { name: "천영우", id: "swedu27", url: "https://cdd7636.github.io/AI2026/" },
-        { name: "한승윤", id: "swedu28", url: "https://seungyun3832.github.io/AI2026/" }
+        { name: "천영우", id: "swedu27", url: "https://cdd7636.github.io/AI2026/", domain: "cdd7636.github.io/AI2026/" },
+        { name: "한승윤", id: "swedu28", url: "https://seungyun3832.github.io/AI2026/", domain: "seungyun3832.github.io/AI2026/" }
       ];
+
+      // Dynamic metrics calculation
+      const totalCount = students.length;
+      const linkedCount = students.filter(s => Boolean(s.url)).length;
+      const pendingCount = totalCount - linkedCount;
+
+      document.querySelector("#total-students").textContent = totalCount;
+      document.querySelector("#linked-count").textContent = linkedCount;
+      document.querySelector("#pending-count").textContent = pendingCount;
+
+      document.querySelector("#filter-linked-btn").textContent = `링크 등록 ${linkedCount}`;
+      document.querySelector("#filter-pending-btn").textContent = `미등록 ${pendingCount}`;
 
       const accents = ["blue", "teal", "coral", "violet", "amber", "slate"];
       const patterns = ["a", "b", "c", "d"];
@@ -108,6 +120,7 @@
 
       students.forEach((student, index) => {
         const linked = Boolean(student.url);
+        const displayDomain = student.domain || (linked ? student.url.replace(/^https?:\/\//, "") : "등록된 GitHub 주소 없음");
         const item = document.createElement("li");
         const surface = document.createElement(linked ? "a" : "article");
 
@@ -136,7 +149,7 @@
           </div>
           ${linked ? "" : '<span class="pending-mark" aria-hidden="true">미</span><span class="sr-only">링크 미등록</span>'}
           <div class="card-footer">
-            <p class="portfolio-domain">${linked ? student.domain : "등록된 GitHub 주소 없음"}</p>
+            <p class="portfolio-domain">${linked ? displayDomain : "등록된 GitHub 주소 없음"}</p>
             <span class="portfolio-action">${linked ? "포트폴리오 보기" : "미등록"}</span>
           </div>
         `;
