@@ -1,0 +1,179 @@
+<!doctype html>
+<html lang="ko">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="2026년 여름방학 인공지능일반 학생 GitHub 포트폴리오 주소를 학번순으로 정리한 페이지">
+  <meta name="theme-color" content="#f3f5fa">
+  <title>학생 GitHub 포트폴리오 | 인공지능일반</title>
+  <link rel="stylesheet" href="github-addresses.css">
+</head>
+
+<body>
+  <a class="skip-link" href="#student-directory">학생 결과물로 건너뛰기</a>
+
+  <header class="shell hero-grid" aria-labelledby="page-title">
+    <section class="hero-panel hero-copy-panel">
+      <p class="eyebrow">2026 COURSE RESULT</p>
+      <h1 id="page-title">인공지능일반 (2026)</h1>
+      <p class="hero-subtitle">학생 GitHub 포트폴리오 아카이브</p>
+    </section>
+
+    <aside class="hero-panel metrics-panel" aria-label="포트폴리오 등록 현황">
+      <div class="metric">
+        <strong class="metric-value">18</strong>
+        <span class="metric-label">수강생</span>
+      </div>
+      <div class="metric">
+        <strong class="metric-value">7</strong>
+        <span class="metric-label">등록 주소</span>
+      </div>
+      <div class="metric">
+        <strong class="metric-value">11</strong>
+        <span class="metric-label">링크 미등록</span>
+      </div>
+    </aside>
+  </header>
+
+  <section class="shell control-panel" aria-label="학생 검색 및 링크 상태 필터">
+    <div>
+      <label class="control-label" for="student-search">학생 검색</label>
+      <div class="search-wrap">
+        <input class="search-field" id="student-search" type="search" placeholder="이름 또는 학번 입력" autocomplete="off">
+      </div>
+    </div>
+    <div>
+      <span class="control-label">링크 상태</span>
+      <div class="filter-bar" role="group" aria-label="링크 상태 필터">
+        <button class="filter-button" type="button" data-filter="all" aria-pressed="true">전체</button>
+        <button class="filter-button" type="button" data-filter="linked" aria-pressed="false">링크 등록 7</button>
+        <button class="filter-button" type="button" data-filter="pending" aria-pressed="false">미등록 11</button>
+      </div>
+    </div>
+  </section>
+
+  <main class="shell directory" id="student-directory">
+    <div class="directory-head">
+      <div>
+        <p class="section-kicker">PORTFOLIO</p>
+        <h2>학생 결과물</h2>
+      </div>
+      <p class="result-count" id="result-count" aria-live="polite">18명 표시</p>
+    </div>
+
+    <ol class="student-list" id="student-list" aria-label="학번순 학생 GitHub 포트폴리오"></ol>
+    <p class="empty-state" id="empty-state" hidden>검색 조건에 맞는 학생이 없습니다.</p>
+  </main>
+
+  <footer>
+    <div class="shell footer-inner">
+      <p>2026년 8월 5일 Padlet ‘깃허브주소’ 게시자 이름 대조 기준</p>
+      <a class="source-link" href="https://padlet.com/pnumin625/2026-yvi0fglmjmepsd0v" target="_blank"
+        rel="noopener noreferrer">원본 Padlet 보기</a>
+    </div>
+  </footer>
+
+  <script>
+    (() => {
+      const students = [
+        { name: "강은지", id: "swedu11", url: "https://eunji-5.github.io/AI2026/" },
+        { name: "권은찬", id: "swedu12", url: "https://090324kecee-maker.github.io/AI2026/" },
+        { name: "김도영", id: "swedu13", url: "https://kdysky09-wq.github.io/AI-2026/" },
+        { name: "김서진", id: "swedu14", url: "https://seojinnnnnnnn.github.io/AI2026/" },
+        { name: "김예찬", id: "swedu15" },
+        { name: "김태윤", id: "swedu16", url: "https://upyajup.github.io/AI2026/", domain: "upyajup.github.io/AI2026/" },
+        { name: "김태희", id: "swedu17", url: "https://swedu17.github.io/AI-2026/", domain: "swedu17.github.io/AI-2026/" },
+        { name: "문지훈", id: "swedu18", url: "https://haanjiseonloveleeyeajoon.github.io/2026AI/" },
+        { name: "박우혁", id: "swedu19", url: "https://paintingsf.github.io/AI2026/", domain: "paintingsf.github.io/AI2026/" },
+        { name: "배이롭", id: "swedu20", url: "https://r-609.github.io/AI2026/" },
+        { name: "신승하", id: "swedu21", url: "https://sinseungha335-art.github.io/AI2026/", domain: "sinseungha335-art.github.io/AI2026/" },
+        { name: "이동관", id: "swedu22", url: "https://dlehdrhksdlehdrhksdlehdrhks.github.io/AI2026/", domain: "dlehdrhksdlehdrhksdlehdrhks.github.io/AI2026/" },
+        { name: "이지후", id: "swedu23", url: "https://ji4672387-beep.github.io/AI2026/" },
+        { name: "정상윤", id: "swedu24", url: "https://harry20090515-ai.github.io/AI2026/" },
+        { name: "정연우", id: "swedu25", url: "https://yweox.github.io/AI2026/", domain: "yweox.github.io/AI2026/" },
+        { name: "제준영", id: "swedu26", url: "https://wpwnsdud1234.github.io/AI2026/", domain: "wpwnsdud1234.github.io/AI2026/" },
+        { name: "천영우", id: "swedu27", url: "https://cdd7636.github.io/AI2026/" },
+        { name: "한승윤", id: "swedu28", url: "https://seungyun3832.github.io/AI2026/" }
+      ];
+
+      const accents = ["blue", "teal", "coral", "violet", "amber", "slate"];
+      const patterns = ["a", "b", "c", "d"];
+      const list = document.querySelector("#student-list");
+      const search = document.querySelector("#student-search");
+      const buttons = Array.from(document.querySelectorAll(".filter-button"));
+      const resultCount = document.querySelector("#result-count");
+      const empty = document.querySelector("#empty-state");
+      let activeFilter = "all";
+
+      students.forEach((student, index) => {
+        const linked = Boolean(student.url);
+        const item = document.createElement("li");
+        const surface = document.createElement(linked ? "a" : "article");
+
+        item.className = `card-item accent-${accents[index % accents.length]}`;
+        item.dataset.status = linked ? "linked" : "pending";
+        item.dataset.search = `${student.name} ${student.id}`.toLocaleLowerCase("ko-KR");
+
+        surface.className = `student-card ${linked ? "linked" : "pending"}`;
+        if (linked) {
+          surface.href = student.url;
+          surface.target = "_blank";
+          surface.rel = "noopener noreferrer";
+          surface.setAttribute("aria-label", `${student.name} 포트폴리오 새 창에서 열기`);
+        }
+
+        surface.innerHTML = `
+          <div class="card-main">
+            <span class="pixel-avatar pattern-${patterns[index % patterns.length]}" aria-hidden="true">
+              <span class="pixel-mark"></span>
+            </span>
+            <div class="identity">
+              <p class="course-label">인공지능일반</p>
+              <h3 class="student-name">${student.name}</h3>
+              <p class="student-id">${student.id}</p>
+            </div>
+          </div>
+          ${linked ? "" : '<span class="pending-mark" aria-hidden="true">미</span><span class="sr-only">링크 미등록</span>'}
+          <div class="card-footer">
+            <p class="portfolio-domain">${linked ? student.domain : "등록된 GitHub 주소 없음"}</p>
+            <span class="portfolio-action">${linked ? "포트폴리오 보기" : "미등록"}</span>
+          </div>
+        `;
+
+        item.append(surface);
+        list.append(item);
+      });
+
+      const cards = Array.from(document.querySelectorAll(".card-item"));
+
+      const applyFilters = () => {
+        const query = search.value.trim().toLocaleLowerCase("ko-KR");
+        let visibleCount = 0;
+
+        cards.forEach((card) => {
+          const matchesStatus = activeFilter === "all" || card.dataset.status === activeFilter;
+          const matchesSearch = !query || card.dataset.search.includes(query);
+          const visible = matchesStatus && matchesSearch;
+          card.hidden = !visible;
+          if (visible) visibleCount += 1;
+        });
+
+        empty.hidden = visibleCount !== 0;
+        resultCount.textContent = `${visibleCount}명 표시`;
+      };
+
+      buttons.forEach((button) => {
+        button.addEventListener("click", () => {
+          activeFilter = button.dataset.filter;
+          buttons.forEach((item) => item.setAttribute("aria-pressed", String(item === button)));
+          applyFilters();
+        });
+      });
+
+      search.addEventListener("input", applyFilters);
+    })();
+  </script>
+</body>
+
+</html>
